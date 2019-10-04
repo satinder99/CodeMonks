@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          {% block main %}
+          {% load crispy_forms_tags %}
+          <div class="content-section">
+     <form method="POST">
+       {% csrf_token %}
+       <fieldset class="form-group">
+         <legend class="border-bottom mb-4">Log In</legend>
+         {{ form|crispy }}
+       </fieldset>
+       <div class="form-group" style="width:300px;">
+         <button class="btn btn-outline-info" type="submit">Login</button>
+          <small class="test-muted ml-2">
+
+           <a href="{% url 'password_reset' %}"> Forgot Password?</a>
+      </small>
+       </div>
+     </form>
+     </div>
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
