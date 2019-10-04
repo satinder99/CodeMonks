@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^home/$', home_page),
     url(r'^$', LoginView.as_view(template_name='login/login.html')),
     url(r'^logout/$', LogoutView.as_view(next_page='/')),
+    url(r'^search/', search),
     url(r'^password-reset/', auth_views.PasswordResetView.as_view(template_name='login/password_reset.html'),name = 'password_reset'),
     url(r'^password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='login/password_reset_done.html'),name = 'password_reset_done'),
     url(r'^password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='login/password_reset_confirm.html'),name = 'password_reset_confirm'),

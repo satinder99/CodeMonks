@@ -25,24 +25,23 @@ def home_page(request):
 
         query_columns = ",".join(to_get)    # Columns to select from DB
 
-        # Fetching data from DB
+         Fetching data from DB
         with connection.cursor() as cursor:
             query = 'select ' + query_columns + ' from Student where ' + cond_query
             cursor.execute(query)
             data = list(cursor)
-        Wriing data to excel file
-        wb = Workbook()
-        ws = wb.active
-        ws.append(to_get)
-        for i in data:
-            ws.append(i)
+        #Wriing data to excel file
+        #wb = Workbook()
+        #ws = wb.active
+        #ws.append(to_get)
+        #for i in data:
+        #    ws.append(i)
         
-        wb.save('./data.xlsx')
+        #wb.save('./data.xlsx')
         # Serving the file for download
+        #serve_for_download()
 
-        serve_for_download()
-
-        #return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
+        return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
 
         
 
