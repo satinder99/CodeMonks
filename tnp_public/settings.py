@@ -77,8 +77,15 @@ WSGI_APPLICATION = 'tnp_public.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'tnp',
+        'USER': 'lakshay',
+        'PASSWORD': 'awesome17',
+        'HOST': 'localhost',
+        'PORT': '',
+        'OPTIONS': {
+                   'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -115,6 +122,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
