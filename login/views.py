@@ -25,7 +25,7 @@ def home_page(request):
 
         query_columns = ",".join(to_get)    # Columns to select from DB
 
-         Fetching data from DB
+        # Fetching data from DB
         with connection.cursor() as cursor:
             query = 'select ' + query_columns + ' from Student where ' + cond_query
             cursor.execute(query)

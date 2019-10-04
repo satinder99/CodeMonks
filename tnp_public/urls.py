@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
-from login.views import home_page
+from login.views import home_page,search
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
