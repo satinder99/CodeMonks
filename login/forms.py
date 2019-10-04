@@ -22,3 +22,5 @@ class ConditionForm(forms.Form):
     GENDER = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect, required=True)
 
 
+class SearchForm(forms.Form):
+    URN = forms.CharField(widget=forms.TextInput(), required=False, label='')

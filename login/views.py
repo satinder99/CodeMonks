@@ -30,18 +30,20 @@ def home_page(request):
             query = 'select ' + query_columns + ' from Student where ' + cond_query
             cursor.execute(query)
             data = list(cursor)
-        # Wriing data to excel file
-        # wb = Workbook()
-        # ws = wb.active
-        # ws.append(to_get)
-        # for i in data:
-        #     ws.append(i)
+        Wriing data to excel file
+        wb = Workbook()
+        ws = wb.active
+        ws.append(to_get)
+        for i in data:
+            ws.append(i)
         
-        # wb.save('./data.xlsx')
-
-        return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
-
+        wb.save('./data.xlsx')
         # Serving the file for download
+
+        serve_for_download()
+
+        #return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
+
         
 
     return render(request,'home.html', {'form1':form1, 'form2':form2, 'form3':form3})
@@ -79,3 +81,31 @@ def fix_dots(arr):
         arr[i] = arr[i].replace('_',' ')
         arr[i] = '`{}`'.format(arr[i])
 
+@login_required
+def search(request):
+    try:
+        URN = request.POST['URN']
+    
+    except:
+        return HttpResponse('404 Not Found')
+    print(URN)
+    search_query = 'Select `UNIVERSITY ROLL NO.`,`FULL NAME`,`STUDENTS CONTACT NO.`,`EMAIL ADDRESS`,`GENDER`,`X PERCENTAGE`,`XII PERCENTAGE`,`Aggregate SGPA OBTAINED` from Student where `UNIVERSITY ROLL NO.`=\'{}\''.format(URN)
+
+    with connection.cursor() as cursor:
+        cursor.execute(search_query)
+        data = list(cursor)
+    
+    print(data)
+    return render(request, 'view_data.html', {'data':data[0]})
+
+
+def serve_for_download():
+    file_path = './data.xlsx'
+    filename = 'data.xlsx'
+
+    mime_type, _ = mimetypes.guess_type(file_path)
+    with open(file_path, 'rb') as fl:
+        response = HttpResponse(fl, content_type=mime_type)
+        response['Content-Disposition'] = "attachment; filename={}".format(filename)
+
+        return response
