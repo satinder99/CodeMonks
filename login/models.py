@@ -26,3 +26,16 @@ class BranchCode(models.Model):
         return self.branch_name
 
 
+class CourseCode(models.Model):
+    course_code_id = models.AutoField(primary_key=True)
+    course_name = models.CharField(max_length=50)
+    course_code = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'course_code'
+        unique_together = (('course_code_id', 'course_code'),)
+
+    def __str__(self):
+        return self.course_name
+
