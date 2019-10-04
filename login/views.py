@@ -30,19 +30,18 @@ def home_page(request):
             query = 'select ' + query_columns + ' from Student where ' + cond_query
             cursor.execute(query)
             data = list(cursor)
-        #Wriing data to excel file
-        #wb = Workbook()
-        #ws = wb.active
-        #ws.append(to_get)
-        #for i in data:
-        #    ws.append(i)
+        # Wriing data to excel file
+        # wb = Workbook()
+        # ws = wb.active
+        # ws.append(to_get)
+        # for i in data:
+        #     ws.append(i)
         
-        #wb.save('./data.xlsx')
-        # Serving the file for download
-        #serve_for_download()
+        # wb.save('./data.xlsx')
 
         return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
 
+        # Serving the file for download
         
 
     return render(request,'home.html', {'form1':form1, 'form2':form2, 'form3':form3})
