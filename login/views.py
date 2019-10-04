@@ -11,9 +11,15 @@ from django.contrib.auth.decorators import login_required
 def home_page(request):
 
     form1 = DataForm(request.POST or None)
+    form2 = ConditionForm(request.POST or None)
+    form3 = SearchForm(request.POST or None)
 
-    if form1.is_valid():
+    if form1.is_valid() and form2.is_valid():
+
         to_get = [key for (key,val) in form1.cleaned_data.items() if val]
+        conditions, cond_query = get_conditions(form2)
+        cond_query += '1=1'
+
         # Fixing the field names inconsistency with columns names in DB
         fix_dots(to_get)
 
@@ -21,21 +27,46 @@ def home_page(request):
 
         # Fetching data from DB
         with connection.cursor() as cursor:
-            query = 'select ' + query_columns + ' from Student'
+            query = 'select ' + query_columns + ' from Student where ' + cond_query
             cursor.execute(query)
             data = list(cursor)
         # Wriing data to excel file
-        wb = Workbook()
-        ws = wb.active
-        ws.append(to_get)
-        for i in data:
-            ws.append(i)
+        # wb = Workbook()
+        # ws = wb.active
+        # ws.append(to_get)
+        # for i in data:
+        #     ws.append(i)
         
-        wb.save('./data.xlsx')
+        # wb.save('./data.xlsx')
 
+        return render(request, 'view_before_download.html', {'to_get':to_get, 'data':data})
+
+        # Serving the file for download
         
 
     return render(request,'home.html', {'form1':form1, 'form2':form2, 'form3':form3})
+
+
+
+def get_conditions(form):
+
+    cond = {key:val for (key,val) in form.cleaned_data.items() if val}
+
+    query = ""
+
+    if 'Aggregate_SGPA_OBTAINED' in cond:
+        query += '`Aggregate SGPA OBTAINED`>=\'{}\' AND '.format(cond['Aggregate_SGPA_OBTAINED'])
+    
+    if 'XII_PERCENTAGE' in cond:
+        query += '`XII PERCENTAGE`>=\'{}\' AND '.format(cond['XII_PERCENTAGE'])
+
+    if 'X_PERCENTAGE' in cond:
+        query += '`X PERCENTAGE`>=\'{}\' AND '.format(cond['X_PERCENTAGE'])
+    
+    if not cond['GENDER'] == 'both':
+        query += 'GENDER=\'{}\' AND '.format(cond['GENDER'])
+
+    return cond,query
 
 
 def fix_dots(arr):
