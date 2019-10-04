@@ -1,0 +1,24 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block extrahead %}
+    <link type = "text/css" rel="stylesheet" href = {% static "form.css" %}>
+{% endblock %}
+
+{% block content %}
+<div class="main" >
+
+    <div class = "submain submain2">
+        <div class= "inside_form">
+        <form method="POST"> {% csrf_token %}
+            <table>
+                {{form1}}
+                {{form2}}
+            </table>
+
+            <button type="submit">View in Browser</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
