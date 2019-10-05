@@ -1,4 +1,4 @@
-"""tnp_public URL Configuration
+"""tnp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -18,6 +18,7 @@ from django.conf.urls import url
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
 from login.views import home_page,search
+from django.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -29,4 +30,7 @@ urlpatterns = [
     url(r'^password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='login/password_reset_done.html'),name = 'password_reset_done'),
     url(r'^password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='login/password_reset_confirm.html'),name = 'password_reset_confirm'),
     url(r'^password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='login/password_reset_complete.html'),name = 'password_reset_complete'),
+    # For progressive web app
+
+    url('', include('pwa.urls')),
 ]

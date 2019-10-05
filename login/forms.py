@@ -1,26 +1,32 @@
 from django import forms
 
 class DataForm(forms.Form):
-    UNIVERSITY_ROLL_NO_ = forms.BooleanField(required=False)
-    FULL_NAME_ = forms.BooleanField(required=False)
-    STUDENTS_CONTACT_NO_ = forms.BooleanField(required=False)
-    EMAIL_ADDRESS_ = forms.BooleanField(required=False)
-    GENDER_ = forms.BooleanField(required=False)
-    ADDRESS_ = forms.BooleanField(required=False)
-    X_PERCENTAGE_ = forms.BooleanField(required=False)
-    XII_PERCENTAGE_ = forms.BooleanField(required=False)
-    Aggregate_SGPA_OBTAINED_ = forms.BooleanField(required=False)
-    # Aggregate_ACTIVE_BACKLOGS = forms.BooleanField(required=False)
+    university_roll_no = forms.BooleanField(required=False)
+    full_name = forms.BooleanField(required=False)
+    student_mobile_no = forms.BooleanField(required=False)
+    student_email = forms.BooleanField(required=False)
+    gender = forms.BooleanField(required=False)
+    address = forms.BooleanField(required=False)
+    aggregate_sgpa = forms.BooleanField(required=False)
+    aggregate_active_backlogs = forms.BooleanField(required=False)
 
 class ConditionForm(forms.Form):
 
-    Aggregate_SGPA_OBTAINED = forms.CharField(widget=forms.TextInput(), required=False, label='Min. SGPA')
-    XII_PERCENTAGE = forms.CharField(widget=forms.TextInput(), required=False, label='Min 12th Percentage')
-    X_PERCENTAGE = forms.CharField(widget=forms.TextInput(), required=False, label='Min 10th Percentage')
-
+    min_sgpa = forms.CharField(widget=forms.TextInput(), required=False, label='Min. SGPA')
+    max_backlogs = forms.CharField(widget=forms.TextInput(), required=False, label='Max. Backlogs')
     CHOICES = [('male', 'Male'), ('female', 'Female'), ('both', 'Both')]
-    GENDER = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect, required=True)
-
+    gender_select = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect({'required':'required'}), required=True, label='Gender')
+    # BRANCH_CHOICES = [
+    #     ('cse', 'CSE'),
+    #     ('ece', 'ECE'),
+    #     ('ce', 'CE'),
+    #     ('pe', 'PE'),
+    #     ('mba', 'MBA'),
+    #     ('mca', 'MCA'),
+    #     ('ee', 'EE'),
+    #     ('ie', 'IE'),
+    # ]
+    # branch = forms.CharField(label='Select multiple branch', widget=forms.Select({'multiple':'multiple'},choices=BRANCH_CHOICES))
 
 class SearchForm(forms.Form):
     URN = forms.CharField(widget=forms.TextInput(), required=False, label='')

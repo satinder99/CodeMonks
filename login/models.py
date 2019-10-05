@@ -39,6 +39,7 @@ class CourseCode(models.Model):
     def __str__(self):
         return self.course_name
 
+
 class StudentInfo(models.Model):
     student_info_id = models.AutoField(primary_key=True)
     course_code = models.ForeignKey(CourseCode, on_delete=models.CASCADE, db_column='course_code')
@@ -123,3 +124,45 @@ class StudentInfo(models.Model):
 
     def __str__(self):
         return self.university_roll_no
+
+class SgpaInfo(models.Model):
+    university_roll_no  = models.AutoField(primary_key=True)
+    sem_1               = models.FloatField(blank=True, null=True, default=None)
+    credits_1           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_1   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_1  = models.FloatField(blank=True, null=True, default=None)
+    sem_2               = models.FloatField(blank=True, null=True, default=None)
+    credits_2           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_2   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_2  = models.FloatField(blank=True, null=True, default=None)
+    sem_3               = models.FloatField(blank=True, null=True, default=None)
+    credits_3           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_3   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_3  = models.FloatField(blank=True, null=True, default=None)
+    sem_4               = models.FloatField(blank=True, null=True, default=None)
+    credits_4           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_4   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_4  = models.FloatField(blank=True, null=True, default=None)
+    sem_5               = models.FloatField(blank=True, null=True, default=None)
+    credits_5           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_5   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_5  = models.FloatField(blank=True, null=True, default=None)
+    sem_6               = models.FloatField(blank=True, null=True, default=None)
+    credits_6           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_6   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_6  = models.FloatField(blank=True, null=True, default=None)
+    sem_7               = models.FloatField(blank=True, null=True, default=None)
+    credits_7           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_7   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_7  = models.FloatField(blank=True, null=True, default=None)
+    sem_8               = models.FloatField(blank=True, null=True, default=None)
+    credits_8           = models.FloatField(blank=True, null=True, default=None)
+    active_backlogs_8   = models.FloatField(blank=True, null=True, default=None)
+    passive_backlogs_8  = models.FloatField(blank=True, null=True, default=None)
+    
+    @property
+    def aggregate_sgpa(self):
+        return (self.sem_1+self.sem_2+self.sem_3+self.sem_4+self.sem_5+self.sem_6+self.sem_7+self.sem_8)/2
+    
+    class Meta:
+        db_table = 'sgpa_info'
