@@ -144,6 +144,7 @@ LOGIN_REDIRECT_URL = '/home'
 
 # Progressive Web App Manifest
 PWA_APP_NAME ='Training And Placement Cell'
+PWA_SHORT_NAME = 'TnP'
 PWA_APP_DESCRIPTION = "Student's Eligibility Details"
 PWA_APP_THEME_COLOR = '#1952ab'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
