@@ -1,0 +1,33 @@
+{% extends 'basic.html' %}
+
+{% block search %}
+<a class="nav-link navbar-right"href="/logout/">Logout<span class="sr-only">(current)</span></a>
+{% endblock %}
+{% block content %}
+
+{% if data %}
+
+<div class="container">
+	<table border="2px" style="margin-top: 100px" >
+		<tr>
+			<th>URN :</th><td>{{data.0}}</td>
+		</tr>
+		<tr>
+				<th>Name :</th><td>{{data.1}}</td>
+		</tr>
+		<tr>
+				<th>Contact No. :</th><td>{{data.2}}</td>
+		</tr>
+		<tr>
+				<th>Email :</th><td>{{data.3}}</td>
+		</tr>
+		<tr>
+				<th>Gender :</th><td>{{data.4}}</td>
+		</tr>
+		<tr>
+			<th>SGPA</th><td>{{data.5}}</td>
+		</tr>
+	</table>
+<div>
+{% endif %}
+{% endblock %}

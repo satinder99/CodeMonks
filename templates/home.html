@@ -1,0 +1,40 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extrahead %}
+ <!--   <link type = "text/css" rel="stylesheet" href = {% static "form.css" %}>
+ -->{% endblock %}
+
+{% block content %}
+<div class="main container d-flex h-100" >
+	    <div class="row justify-content-center">
+        <div class="col-sm-20">
+<div class="content-section">
+        <form method="POST"> {% csrf_token %}
+		<div class="row" style="margin:40px">	
+		<div class="col-xs-8" style="margin-right:150px">
+
+		<fieldset class="aa">
+                <legend style="color:black" class="border-bottom mb-4">REQUIREMENTS</legend>
+                {{ form1|crispy }}
+                </fieldset>
+		</div>
+		<div class="col-xs-2">
+
+		<fieldset class="aa">
+                <legend style="color:black" class="border-bottom mb-4">CONSTRAINTS</legend>
+                {{ form2|crispy }}
+                </fieldset>
+		</div>
+		</div>
+                <div class="form-group" style="width:300px;margin:40px;">
+                    <button type="submit">Submit</button>
+                   
+                </div>
+		
+
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
